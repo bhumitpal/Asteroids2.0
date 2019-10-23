@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animController = GetComponentInChildren<Animator>();
+        //transform.position = Vector3.one * (Random.Range(1, 75));
     }
 
     // Update is called once per frame
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void ProcessInput()
     {
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             isMoveF = true;
         }
@@ -61,9 +62,28 @@ public class PlayerController : MonoBehaviour
             isMoveB = false;
         }
 
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    isMoveL = true;
+        //}
+        //else
+        //{
+        //    isMoveL = false;
+
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    isMoveR = true;
+        //}
+        //else
+        //{
+        //    isMoveR = false;
+        //}
+
         if (Input.GetKey(KeyCode.A))
         {
             isMoveL = true;
+
             animController.SetBool("isTiltLeft", true);
         }
         else
@@ -75,6 +95,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             isMoveR = true;
+
             animController.SetBool("isTiltRight", true);
         }
         else
@@ -83,7 +104,7 @@ public class PlayerController : MonoBehaviour
             animController.SetBool("isTiltRight", false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             isShoot = true;
         }
@@ -100,15 +121,31 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.forward * -1 * speed, ForceMode.Force);
         }
+
+
         if (isMoveL)
         {
-            // rb.AddForce(transform.right * -1 * speed, ForceMode.Force);
-            rb.AddTorque(transform.up * -1 * speed, ForceMode.Force);
+            //rb.AddTorque(new Vector3(0, -1, 0).normalized * speed, ForceMode.Force);
+            //rb.AddTorque(new Vector3(0, 0, 0).normalized * speed, ForceMode.Force);
+
+            //    float turn = Input.GetAxis("Horizontal");
+            transform.Rotate(Vector3.up*-speed/10*Time.deltaTime);// = Quaternion.Euler(0, 2 * speed*Time.deltaTime, 0);
+            //    //rb.AddTorque(transform.up * speed * turn);
+            //    //rb.AddForce(transform.right * -1 * speed, ForceMode.Force);
+            //    //rb.AddTorque(transform.up * -1 * speed, ForceMode.Force);
         }
         if (isMoveR)
         {
-            //rb.AddForce(transform.right * speed, ForceMode.Force);
-            rb.AddTorque(transform.up  * speed, ForceMode.Force);
+            //transform.rotation = Quaternion.Euler(0, 2 * -speed * Time.deltaTime, 0);
+            transform.Rotate(Vector3.up*speed/10*Time.deltaTime);// = Quaternion.Euler(0, 2 * speed*Time.deltaTime, 0);
+            //rb.AddTorque(new Vector3(0, 1, 0).normalized * speed, ForceMode.Force);
+            //rb.AddTorque(new Vector3(0, 0, 0).normalized * speed, ForceMode.Force);
+            
+            
+            //    float turn = Input.GetAxis("Horizontal");
+            //    rb.AddTorque(transform.up * speed * turn);
+            //    //rb.AddForce(transform.right * speed, ForceMode.Force);
+            //    // rb.AddTorque(transform.up * speed, ForceMode.Force);
         }
     }
 

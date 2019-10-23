@@ -51,7 +51,7 @@ public class AsteroidManager : MonoBehaviour
         {
             for (float z = 0; z < depth; z += Random.Range(1f, 1f))
             {
-                float pcheck = Mathf.PerlinNoise(x / width * noiseStrength, z / depth * noiseStrength);
+                float pcheck = Mathf.PerlinNoise(x / width * noiseStrength+(Random.Range(0,1)), z / depth * noiseStrength);
                 if (pcheck*(Random.Range(0f,2f)) >= threshold*(Random.Range(1f,2f)))
                 {
                     GameObject asteroidObj =
